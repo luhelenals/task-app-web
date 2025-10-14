@@ -2,7 +2,7 @@ node_modules/
 
 /generated/prisma
 
-./package-lock.json
+/backend/package-lock.json
 dist/
 .env
 .DS_Store
