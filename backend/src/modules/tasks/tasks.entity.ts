@@ -1,5 +1,3 @@
-// src/modules/tasks/task.entity.ts
-
 import { User } from '../users/users.entity';
 import { 
     Entity, 
