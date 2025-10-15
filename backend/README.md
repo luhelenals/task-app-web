@@ -2,24 +2,12 @@
 
 API RESTful desenvolvida com NestJS, Prisma ORM e SQLite para gerenciamento de tarefas com autenticação JWT.
 
-## 📋 Índice
-
-- Tecnologias
-- Estrutura do Projeto
-- Configuração
-- Executando o Projeto
-- Endpoints da API
-- Exemplos de Requisições
-
 ## 🚀 Tecnologias
 
 - **Framework**: NestJS
 - **ORM**: Prisma
 - **Banco de Dados**: SQLite
-- **Autenticação**: JWT (JSON Web Token)
-- **Validação**: class-validator
-- **Hash de Senha**: bcrypt
-- **Linguagem**: TypeScript
+- **Autenticação**: JWT
 
 ## 📁 Estrutura do Projeto
 
@@ -52,21 +40,26 @@ backend/
 
 ## ⚙️ Configuração
 
-### 1. Instale as dependências
+### 1. Clone o repositório
 
 ```powershell
-cd backend
+git clone https://github.com/luhelenals/task-app-web.git
+cd task-app-web/backend
+```
+
+### 2. Instale as dependências
+
+```powershell
 npm install
 ```
 
-### 2. Configure as variáveis de ambiente
+### 3. Configure as variáveis de ambiente
 
 Crie um arquivo `backend/.env` na raiz do projeto com as seguintes variáveis (ajuste conforme necessário):
 
 ```env
 DATABASE_URL="file:./tasks.db"
 JWT_SECRET="sua-chave-secreta-aqui"
-PORT=3000
 ```
 
 ### 3. Configure o banco de dados
@@ -74,19 +67,7 @@ PORT=3000
 Execute as migrações do Prisma para criar o banco de dados:
 
 ```powershell
-npx prisma migrate deploy
-```
-
-Ou, em desenvolvimento:
-
-```powershell
 npx prisma migrate dev
-```
-
-Para abrir a interface do Prisma:
-
-```powershell
-npx prisma studio
 ```
 
 ## 🏃 Executando o Projeto
@@ -95,26 +76,6 @@ npx prisma studio
 
 ```powershell
 npm run start:dev
-```
-
-### Modo produção
-
-```powershell
-npm run build
-npm run start:prod
-```
-
-### Executar testes
-
-```powershell
-# Testes unitários
-npm run test
-
-# Testes e2e
-npm run test:e2e
-
-# Cobertura de testes
-npm run test:cov
 ```
 
 A API estará disponível em `http://localhost:3000`
@@ -166,13 +127,6 @@ A API estará disponível em `http://localhost:3000`
 {
   "email": "usuario@example.com",
   "password": "senha12345"
-}
-```
-
-**Resposta (200 OK) - exemplo:**
-```json
-{
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 ```
 
