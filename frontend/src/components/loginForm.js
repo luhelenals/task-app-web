@@ -78,6 +78,15 @@ export const LoginForm = () => {
         {loading ? 'Entrando...' : 'Entrar'}
       </button>
 
+      <button
+        type="button"
+        className="login-register-button"
+        onClick={() => navigate('/register')}
+        aria-label="Criar conta"
+      >
+        Ainda não tem uma conta? Cadastre-se
+      </button>
+
       {error && <div style={{ color: 'var(--accent)', marginTop: 8 }}>{error}</div>}
     </form>
   );

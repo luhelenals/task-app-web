@@ -1,7 +1,89 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const RegisterForm = () => {
-    return (
-        <div>RegisterForm</div>
-    );
-} 
+  const navigate = useNavigate();
+  const [form, setForm] = useState({ email: '', password: '' });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    try {
+      const res = await fetch('http://localhost:4000/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form)
+      });
+
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(text || `Erro ${res.status}`);
+      }
+
+      // conta criada com sucesso -> redireciona para login
+      navigate('/login');
+    } catch (err) {
+      console.error('Signup failed:', err);
+      setError(err.message || 'Erro desconhecido');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <form className="register-form" onSubmit={handleSubmit}>
+      <h2>Criar Conta</h2>
+
+      <label>
+        Email
+        <input
+          name="email"
+          type="email"
+          className="task-input"
+          placeholder="seu@email.com"
+          value={form.email}
+          onChange={handleChange}
+          required
+        />
+      </label>
+
+      <label>
+        Senha
+        <input
+          name="password"
+          type="password"
+          className="task-input"
+          placeholder="Senha"
+          value={form.password}
+          onChange={handleChange}
+          required
+          minLength={6}
+        />
+      </label>
+      
+      <button type="submit" className="task-button" disabled={loading}>
+        {loading ? 'Criando...' : 'Criar conta'}
+      </button>
+
+      <button
+        type="button"
+        className="login-register-button"
+        onClick={() => navigate('/login')}
+        aria-label="Fazer login"
+      >
+        Já tem uma conta? Entre
+      </button>
+
+      {error && <div style={{ color: 'var(--accent)', marginTop: 8 }}>{error}</div>}
+    </form>
+  );
+};
