@@ -1,4 +1,4 @@
-import { Controller, Put, Delete, Param, Body, UseGuards, Req, ForbiddenException } from '@nestjs/common';
+import { Controller, Put, Delete, Param, Body, UseGuards, Req, ForbiddenException, Get } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { AuthGuard } from '@nestjs/passport';
 import type { Request } from 'express';
@@ -7,6 +7,11 @@ import type { Request } from 'express';
 @Controller('users')
 export class UsersController {
     constructor(private readonly usersService: UsersService) {}
+
+    @Get(':email')
+    async getUser(@Param('email') email: string) {
+        return this.usersService.findByEmail(email);
+    }
 
     @Put(':id')
     async updateUser(

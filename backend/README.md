@@ -93,6 +93,7 @@ A API estará disponível em `http://localhost:3000`
 
 | Método | Endpoint | Descrição | Autenticação |
 |--------|----------|-----------|--------------|
+| GET | `/users/:id` | Obter usuário | Sim (JWT) |
 | PUT | `/users/:id` | Atualizar usuário | Sim (JWT) |
 | DELETE | `/users/:id` | Deletar usuário | Sim (JWT) |
 
