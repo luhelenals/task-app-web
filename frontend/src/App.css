@@ -1,38 +1,137 @@
-.App {
-  text-align: center;
+:root{
+  --bg-dark: #071027;        /* azul bem escuro, quase preto */
+  --panel: #0b1630;
+  --muted: #1a2640;
+  --accent: #ffd6e1;        /* rosa clarinho */
+  --accent-strong: #ffb0cf;
+  --text: #e6eef9;
+  --muted-text: #a9bfd8;
+  --glass: rgba(255,255,255,0.03);
+  --radius: 10px;
+  --shadow: 0 6px 18px rgba(2,8,23,0.6);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  font-family: Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(180deg, var(--bg-dark) 0%, #02030a 100%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding:32px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* App container */
+.App{
+  max-width:960px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;                  /* centraliza verticalmente */
+  justify-content:center;
+  gap:24px;
+  min-height: calc(100vh - 64px);     /* ocupa a altura disponível (considera padding do body) */
+  padding: 0 16px;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* ...existing code... */
+.task-wrapper{
+  width:100%;
+  max-width:480px;                    /* limita largura do painel */
+  margin:0 auto;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:var(--radius);
+  padding:20px;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(255,255,255,0.03);
+}
+/* ...existing code... */
+.TaskForm{
+  display:flex;
+  flex-direction:column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap:12px;
+  width:100%;
+  max-width:380px;                    /* tamanho menor do form */
+  margin:0 auto;                       /* centra dentro do painel */
 }
 
-.App-link {
-  color: #61dafb;
+/* Inputs */
+.task-input{
+  width:100%;
+  padding:12px 14px;
+  background:linear-gradient(180deg, var(--muted), var(--panel));
+  border:1px solid rgba(255,255,255,0.04);
+  color:var(--text);
+  border-radius:8px;
+  outline:none;
+  transition: transform .08s, border-color .12s;
+  font-size:14px;
+  /* box-shadow removido para deixar sem sombreamento */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.task-input::placeholder{
+  color:var(--muted-text);
+}
+
+/* Focus states */
+.task-input:focus{
+  border-color:var(--accent-strong);
+  /* foco sem sombra; mantém apenas a mudança de borda */
+  transform: none;
+}
+
+/* Buttons */
+.task-button{
+  align-self:flex-end;
+  padding:10px 16px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-strong) 100%);
+  color:#061025;
+  font-weight:600;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  box-shadow: 0 6px 18px rgba(255,170,200,0.08);
+  transition:transform .12s, box-shadow .12s, opacity .12s;
+}
+
+/* If button is an empty tag (self-closing) ensure it has visible area */
+.task-button[type="submit"]{
+  min-width:110px;
+  min-height:40px;
+}
+
+/* Hover/active for button */
+.task-button:hover{
+  transform:translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255,160,200,0.12);
+}
+.task-button:active{ transform:translateY(0); }
+
+/* Small responsive tweaks */
+@media (max-width:640px){
+  body{ padding:18px }
+  .App{ padding:0 8px }
+  .task-button{ width:100%; align-self:stretch }
+}
+
+/* Generic components placeholders to cover other existing components */
+.login-form, .register-form, .edit-task, .tasks{
+  background:var(--glass);
+  border-radius:8px;
+  padding:12px;
+  border:1px solid rgba(255,255,255,0.02);
+  color:var(--text);
+}
+
+/* Headings and labels */
+h1,h2,h3{
+  color:var(--text);
+  margin:0 0 8px 0;
+}
+label{
+  color:var(--muted-text);
+  font-size:13px;
+  margin-bottom:4px;
+  display:block;
 }
