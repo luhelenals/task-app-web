@@ -34,7 +34,7 @@ export const LoginForm = () => {
       if (data.access_token) {
         localStorage.setItem('token', data.access_token);
       }
-      navigate('/tasks/create');
+      navigate('/tasks');
 
     } catch (err) {
       console.error(err);
