@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const LoginForm = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -28,12 +30,11 @@ export const LoginForm = () => {
       }
 
       const data = await res.json();
-      console.log('Signin response:', data);
 
-      if (data.token) {
-        localStorage.setItem('token', data.token);
+      if (data.access_token) {
+        localStorage.setItem('token', data.access_token);
       }
-      // opcional: redirecionar o usuário ou atualizar contexto de auth aqui
+      navigate('/tasks/create');
 
     } catch (err) {
       console.error(err);
