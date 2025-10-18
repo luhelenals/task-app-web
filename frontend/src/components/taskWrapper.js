@@ -1,7 +1,10 @@
 import React from 'react';
+import { TaskForm } from './taskForm';
 
 export const TaskWrapper = () => {
     return (
-        <div>TaskWrapper</div>
+        <div className='task-wrapper'>
+            <TaskForm/>
+        </div>
     );
 } 
