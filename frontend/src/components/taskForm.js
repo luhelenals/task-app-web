@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 
 export const TaskForm = () => {
+    const navigate = useNavigate();
     const [task, setTask] = useState({
         titulo: '',
         descricao: '',
@@ -48,6 +50,8 @@ export const TaskForm = () => {
 
             // limpa o formulário
             setTask({ titulo: '', descricao: '', data_conclusao: '' });
+
+            navigate('/tasks');
         } catch (err) {
             console.error('Falha ao salvar tarefa:', err);
             setError(err.message || 'Erro desconhecido');
